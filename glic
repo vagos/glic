@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# glic: turn any library into a cli utility
+# glic: Turn any library into a cli utility.
 
 help()
 {
