@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# glic: turn any library into a cli utility
+
+help()
+{
+    echo "Usage: glic <library> <function> [options]"
+    echo "Turn a library function into a cli utility."
+    echo "Options:"
+    echo "  -l, --lang <language>   Specify the language runtime (default: nodejs)"
+    echo
+    echo "Example:"
+    echo "glic lodash camelCase"
+    echo
+    echo "This will create a CLI utility that uses lodash's camelCase function."
+}
+
+
+glic_lib="$PWD/lib"
+lib="$1"
+func="$2"
+shift 2
+
+lang="nodejs"
+while getopts "l:" opt; do
+    case "$opt" in
+        l) lang="$OPTARG" ;;
+        *) help; exit 1 ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+if [ -z "$lib" ] || [ -z "$func" ]; then
+    help
+    exit 1
+fi
+
+glic_exec_nodejs()
+{
+    npm init -y >/dev/null 2>&1
+    npm install "$lib" >/dev/null 2>&1
+    cp "$glic_lib/glic.js" .
+    ./glic.js "$lib" "$func" "$@"
+}
+
+# Main logic
+tmpdir=$(mktemp -d)
+cd "$tmpdir" || exit 1
+
+case "$lang" in
+    nodejs) glic_exec_nodejs "$@" ;;
+    *) echo "Unsupported language: $lang"; exit 1 ;;
+esac
