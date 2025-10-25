@@ -4,7 +4,7 @@
 
 help()
 {
-    echo "Usage: glic <library> <function> [options]"
+    echo "Usage: glic [options] <library> <function> [args...]"
     echo "Turn a library function into a cli utility."
     echo "Options:"
     echo "  -l, --lang <language>   Specify the language runtime (default: nodejs)"
@@ -15,12 +15,6 @@ help()
     echo "This will create a CLI utility that uses lodash's camelCase function."
 }
 
-
-glic_lib="$PWD/lib"
-lib="$1"
-func="$2"
-shift 2
-
 lang="nodejs"
 while getopts "l:" opt; do
     case "$opt" in
@@ -29,6 +23,11 @@ while getopts "l:" opt; do
     esac
 done
 shift $((OPTIND - 1))
+
+glic_lib="$PWD/lib"
+lib="$1"
+func="$2"
+shift 2
 
 if [ -z "$lib" ] || [ -z "$func" ]; then
     help
