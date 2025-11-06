@@ -25,7 +25,12 @@ while getopts "l:h" opt; do
 done
 shift $((OPTIND - 1))
 
-glic_lib="$PWD/lib"
+glic_lib="${GLIC_LIB:-/usr/local/share/glic/lib}"
+[ -d "$glic_lib" ] || {
+    echo "glic library path not found: $glic_lib"
+    exit 1
+}
+
 lib="$1"
 func="$2"
 shift 2
