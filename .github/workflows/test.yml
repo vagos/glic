@@ -11,6 +11,9 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Install
+        run: sudo make install
+
       - name: Run tests
         run: |
           chmod +x ./test/test.sh
