@@ -2,3 +2,9 @@ glic
 ----
 
 Turn any library into a cli utility.
+
+INSTALLATION
+  make install
+
+SUPPORTED RUNTIMES
+  - npm/nodejs
