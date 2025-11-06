@@ -1,7 +1,6 @@
 glic
 ----
-
-Turn any library into a cli utility.
+Turn any library into a command-line utility.
 
 INSTALLATION
   make install
