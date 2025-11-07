@@ -2,6 +2,14 @@ glic
 ----
 Turn any library into a command-line utility.
 
+EXAMPLES
+  $ glic lodash camelCase hello_world
+  helloWorld
+  $ glic left-pad . 'foo' 5 'x'
+  xxfoo
+
+Note: If a library exports a single function, use dot (.) to reference it.
+
 INSTALLATION
   make install
 
