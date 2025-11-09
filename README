@@ -7,6 +7,15 @@ EXAMPLES
   helloWorld
   $ glic left-pad . 'foo' 5 'x'
   xxfoo
+  $ glic lodash startCase hello_world
+  Hello World
+  $ glic slugify . "Hello, World"
+  Hello-World
+  $ glic qs parse 'topic=glic&count=2'
+  {
+    "topic": "glic",
+    "count": "2"
+  }
 
 Note: If a library exports a single function, use dot (.) to reference it.
 
